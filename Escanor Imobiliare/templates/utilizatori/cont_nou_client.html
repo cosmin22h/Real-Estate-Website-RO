@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section id="register" class="bg-light py-5">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-6 mx-auto">
+            <div class="card">
+               <div class="card-header bg-primary text-white">
+                  <h4>
+                     <i class="fas fa-user-plus"></i> Cont nou
+                  </h4>
+               </div>
+               <div class="card-body">
+                  <!-- Alerts-->
+                  {% include 'partials/_alerts.html' %}
+                  <form action="{% url 'register_client' %}" method="POST">
+                     {% csrf_token %}
+                     <div class="form-group">
+                        <select name="tip_client" class="form-control" required>
+                           <option value="Client">Client</option>
+                           <option value="Proprietar">Proprietar</option>
+                         </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="nume">Nume</label>
+                        <input type="text" name="nume" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="prenume">Prenume</label>
+                        <input type="text" name="prenume" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="telefon">Telefon</label>
+                        <input type="text" name="telefon" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="data_nasterii">Data nașterii</label>
+                        <input type="date" name="data_nasterii" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="password">Parolă</label>
+                        <input type="password" name="password" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="password">Confirmare parolă</label>
+                        <input type="password" name="password2" class="form-control" required>
+                     </div>
+                     <input type="submit" value="Confirmare cont" class="btn btn-secondary btn-block">
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+{% endblock %}

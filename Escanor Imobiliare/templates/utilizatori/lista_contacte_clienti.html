@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{client.nume}} {{client.prenume}}</h1>
+          <p class="lead">Client</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'client_account' %}">
+                Client: {{client.nume}} {{client.prenume}}</a>
+          </li>
+          <li class="breadcrumb-item active"> Contactele mele</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+  {% include 'partials/_alerts.html' %}
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Contactele mele</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titlu proprietate</th>
+                <th scope="col">Proprietar contactat</th>
+                <th scope="col"></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for contact in contacts %}
+              <tr>
+                  <td>{{contact.id}}</td>
+                  {% if contact.tip_anunt == "Apartament" %}
+                    <td><a href="{% url 'apartament' contact.ID_anunt%}"> {{contact.titlu_anunt}} </a></td>
+                  {% else %}
+                    {% if contact.tip_anunt == "Casa" %}
+                        <td><a href="{% url 'house' contact.ID_anunt%}"> {{contact.titlu_anunt}} </a></td>
+                      {% else %}
+                        <td><a href="{% url 'land' contact.ID_anunt%}"> {{contact.titlu_anunt}} </a></td>
+                    {% endif %}
+                  {% endif %}
+                  <td>
+                  {% if contact.proprietar_contactat %}
+                    Da
+                  {% else %}
+                    Nu
+                  {% endif %}
+                  </td>
+                  <td>
+                  <a class="btn btn-secondary" href="{% url 'profil_real_estate' contact.ID_agentie %}">Vezi agenție responsabilă</a>
+                  </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br><br>
+{% endblock %}

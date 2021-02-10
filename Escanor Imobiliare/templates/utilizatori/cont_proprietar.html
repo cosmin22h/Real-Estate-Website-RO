@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{client.nume}} {{client.prenume}}</h1>
+          <p class="lead">Proprietar</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> Proprietar: {{client.nume}} {{client.prenume}}</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+  {% include 'partials/_alerts.html' %}
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Bine ai venit, {{client.prenume}}!</h2>
+          <a href="{% url 'add_apartament' %}" class="btn btn-primary" role="button">Adaugă apartament</a>
+          <a href="{% url 'add_house' %}" class="btn btn-primary" role="button">Adaugă casă</a>
+          <a href="{% url 'add_land' %}" class="btn btn-primary" role="button">Adaugă teren</a>
+          <a href="{% url 'owner_listings' %}" class="btn btn-secondary" role="button">Anunțurile mele</a>
+          <a href="{% url 'msgs' %}" class="btn btn-secondary" role="button">Mesaje</a>
+          <a href="{% url 'list_real_estate' %}" class="btn btn-secondary" role="button">Vezi agențiile imobiliare</a>
+          <a href="{% url 'edit_client_account' %}" class="btn btn-primary" role="button">Editare cont</a>
+          <a href="{% url 'change_password' %}" class="btn btn-primary" role="button">Schimbare parolă</a>
+          <br>
+          <br>
+          <p>Ultimele mesaje: </p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titlu proprietate</th>
+                <th scope="col">Dată contactare</th>
+                <th scope="col"></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for contact in contacts %}
+              <tr>
+                  <td>{{contact.id}}</td>
+                  {% if contact.tip_anunt == "Apartament" %}
+                    <td><a href="{% url 'apartament' contact.ID_anunt%}"> {{contact.titlu_anunt}} </a></td>
+                  {% else %}
+                    {% if contact.tip_anunt == "Casa" %}
+                        <td><a href="{% url 'house' contact.ID_anunt%}"> {{contact.titlu_anunt}} </a></td>
+                      {% else %}
+                        <td><a href="{% url 'land' contact.ID_anunt%}"> {{contact.titlu_anunt}} </a></td>
+                    {% endif %}
+                  {% endif %}
+                  <td>{{contact.data_contactare}}</td>
+                  <td>
+                    <a class="btn btn-primary" href="{% url 'msg' contact.id %}">Vezi mesaj</a>
+                  </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

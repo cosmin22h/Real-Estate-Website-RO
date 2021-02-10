@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<!-- Expune mesaj -->
+<section id="showcase-inner" class="py-5 text-white">
+   <div class="container">
+      <div class="row text-center">
+         <div class="col-md-12">
+            <h1 class="display-4">Ce mai aștepți?</h1>
+            <p class="lead">Caută proprieatatea care ți se potrivește cel mai bine. Sigur este aici!</p>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+   <div class="container">
+      <nav aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+               <a href="{% url 'index' %}">
+               <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item active">Anunțuri</li>
+         </ol>
+      </nav>
+   </div>
+</section>
+{% include 'partials/_alerts.html' %}
+
+<!-- Anunturi: ultime 3 adaugate din fiecare categorie -->
+<section id="listings" class="py-4">
+   <div class="container">
+      <div class="row">
+         <!--Apartamente-->
+         {% if apartaments %}
+         {% for apartament in apartaments %}
+         <div class="col-md-6 col-lg-4 mb-4r">
+            <div class="card listing-preview">
+               <!--Fotografie pricipala-->
+               <img class="card-img-top" src="{{apartament.fotografie1.url}}" alt="" width="500" height="250">
+               <!--Pret-->
+               <div class="card-img-overlay">
+                  <h2>
+                     <span class="badge badge-secondary text-white">€ {{apartament.pret | intcomma}}</span>
+                  </h2>
+               </div>
+               <!--Titlu si localizare-->
+               <div class="card-body">
+                  <div class="listing-heading text-center">
+                     <h4 class="text-primary">{{apartament.titlu}}</h4>
+                     <p>
+                        <i class="fas fa-map-marker text-secondary"></i> {{apartament.oras_sau_localitate}}, {{apartament.judet}}
+                     </p>
+                  </div>
+                  <hr>
+                  <!--Specificatii: suprafata utili, etaj, compartimentare, nr. camere -->
+                  <div class="row py-2 text-secondary">
+                     <div class="col-7">
+                        <i class="fas fa-th-large"></i> {{apartament.suprafata_utila}} mp utili
+                     </div>
+                     <div class="col-5">
+                        <i class="fas fa-building"></i> Etaj: {% if apartament.etaj == 0 %}
+                        Parter
+                        {% else %}
+                        {{apartament.etaj}}
+                        {% endif %}
+                     </div>
+                  </div>
+                  <div class="row py-3 text-secondary">
+                     <div class="col-7">
+                        <i class="fas fa-box"></i> {{apartament.compartimentare}}
+                     </div>
+                     <div class="col-5">
+                        <i class="fas fa-couch"></i> Camere: {{apartament.numar_camere}}
+                     </div>
+                  </div>
+                  <hr>
+                  <!--Agentie si de cat este publicat anuntul-->
+                  <div class="row py-2 text-secondary">
+                     <div class="col-12">
+                        <i class="fas fa-briefcase"></i> {{apartament.agentie_responsabila}}
+                     </div>
+                  </div>
+                  <div class="row text-secondary pb-2">
+                     <div class="col-10">
+                        <i class="fas fa-clock"></i> {{apartament.data_publicare | timesince}}
+                     </div>
+                  </div>
+                  <hr>
+                  <a href="{% url 'apartament' apartament.id %}" class="btn btn-primary btn-block">Vezi mai mult</a>
+               </div>
+            </div>
+            <pre class="tab"></pre>
+         </div>
+         {% endfor %}
+         {% endif %}
+         <!--Casa-->
+         {% if houses %}
+         {% for house in houses %}
+         <div class="col-md-6 col-lg-4 mb-4r">
+            <div class="card listing-preview">
+               <!--Fotografie principala-->
+               <img class="card-img-top" src="{{house.fotografie1.url}}" alt="" width="500" height="250">
+               <!--Pret-->
+               <div class="card-img-overlay">
+                  <h2>
+                     <span class="badge badge-secondary text-white">€ {{house.pret | intcomma}}</span>
+                  </h2>
+               </div>
+               <!--Titlu si localizare-->
+               <div class="card-body">
+                  <div class="listing-heading text-center">
+                     <h4 class="text-primary">{{house.titlu}}</h4>
+                     <p>
+                        <i class="fas fa-map-marker text-secondary"></i> {{house.oras_sau_localitate}}, {{house.judet}}
+                     </p>
+                  </div>
+                  <hr>
+                  <!--Specificatii casa: suprafata utlila, teren, nr. dormitoare, regim inaltime -->
+                  <div class="row py-2 text-secondary">
+                     <div class="col-6">
+                        <i class="fas fa-th-large"></i> {{house.suprafata_utila}} mp utili
+                     </div>
+                     <div class="col-6">
+                        <i class="fas fa-seedling"></i> {{house.suprafata_teren}} mp teren
+                     </div>
+                  </div>
+                  <div class="row py-3 text-secondary">
+                     <div class="col-6">
+                        <i class="fas fa-bed"></i> Dormitoare: {{house.numar_dormitoare}}
+                     </div>
+                     <div class="col-6">
+                        <i class="fas fa-home"></i> {{house.regim_inaltime}}
+                     </div>
+                  </div>
+                  <hr>
+                  <!--Agenite si de cat este publicat anuntul -->
+                  <div class="row py-2 text-secondary">
+                     <div class="col-12">
+                        <i class="fas fa-briefcase"></i> {{house.agentie_responsabila}}
+                     </div>
+                  </div>
+                  <div class="row text-secondary pb-2">
+                     <div class="col-10">
+                        <i class="fas fa-clock"></i> {{house.data_publicare | timesince}}
+                     </div>
+                  </div>
+                  <hr>
+                  <a href="{% url 'house' house.id %}" class="btn btn-primary btn-block">Vezi mai mult</a>
+               </div>
+            </div>
+            <pre class="tab"></pre>
+         </div>
+         {% endfor %}
+         {% endif %}
+         <!--Teren-->
+         {% if lands %}
+         {% for land in lands %}
+         <div class="col-md-6 col-lg-4 mb-4r">
+            <div class="card listing-preview">
+               <!--Fotografie principala-->
+               <img class="card-img-top" src="{{land.fotografie1.url}}" alt="" width="500" height="250">
+               <!--Pret-->
+               <div class="card-img-overlay">
+                  <h2>
+                     <span class="badge badge-secondary text-white">€ {{land.pret | intcomma}}</span>
+                  </h2>
+               </div>
+               <!--Titlu si localizare-->
+               <div class="card-body">
+                  <div class="listing-heading text-center">
+                     <h4 class="text-primary">{{land.titlu}}</h4>
+                     <p>
+                        <i class="fas fa-map-marker text-secondary"></i> {{land.oras_sau_localitate}}, {{land.judet}}
+                     </p>
+                  </div>
+                  <hr>
+                  <!--Specificatii teren: tip, suprafata-->
+                  <div class="row py-2 text-secondary">
+                     <div class="col-9">
+                        <i class="fas fa-sign"></i> Teren: {{land.tip_teren}}
+                     </div>
+                  </div>
+                  <div class="row py-3 text-secondary">
+                     <div class="col-6">
+                        <i class="fas fa-th-large"></i> {{land.suprafata_teren}} mp
+                     </div>
+                  </div>
+                  <hr>
+                  <!--Agentie si de cat este punlic anuntul-->
+                  <div class="row py-2 text-secondary">
+                     <div class="col-12">
+                        <i class="fas fa-briefcase"></i> {{land.agentie_responsabila}}
+                     </div>
+                  </div>
+                  <div class="row text-secondary pb-2">
+                     <div class="col-10">
+                        <i class="fas fa-clock"></i> {{land.data_publicare | timesince}}
+                     </div>
+                  </div>
+                  <hr>
+                  <a href="{% url 'land' land.id %}" class="btn btn-primary btn-block">Vezi mai mult</a>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+         {% endif %}
+      </div>
+      <pre class="tab"></pre>
+   </div>
+</section>
+
+<!--Selectarea anunturilor -->
+<section id="work" class="bg-dark text-white text-center">
+   <h2 class="display-4">Ce ți-ai dori mai mult?</h2>
+   <h4></h4>
+   <a href="{% url 'apartaments' %}" class="btn btn-secondary text-white btn-lg">Un apartament</a>
+   <a href="{% url 'houses' %}" class="btn btn-secondary text-white btn-lg">O casă</a>
+   <a href="{% url 'lands' %}" class="btn btn-secondary text-white btn-lg">Un teren</a>
+</section>
+{% endblock%}

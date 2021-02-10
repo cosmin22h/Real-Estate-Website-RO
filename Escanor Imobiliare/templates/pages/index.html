@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Cautare -->
+<section id="showcase">
+   <div class="container text-center" >
+      <div class="home-search p-5">
+         <div class="overlay p-5">
+            <h1 class="display-4 mb-4">
+               O nouă casă, un nou răsărit
+            </h1>
+            <p class="lead">Niciodată nu a fost mai ușor sa îți găsești locul</p>
+            <div class="search">
+               <form action="{% url 'search' %}">
+                  <!-- Rand 1 - obligatorii -->
+                  <div class="form-row">
+                     <div class="col-md-6 mb-3">
+                        <label class="sr-only">tip</label>
+                        <select name="tip" class="form-control" required>
+                           <option value="" selected="true" disabled="disabled">Tip proprietate</option>
+                           {% for key, value in type %}
+                           <option value="{{key}}">{{value}}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <div class="col-md-6 mb-3">
+                        <select name="judet" class="form-control" required>
+                           <option value="" selected="true" disabled="disabled">Județ</option>
+                           {% for key, value in states %}
+                           <option value="{{key}}">{{value}}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                  </div>
+                  <!-- Rand 2 - optionale -->
+                  <div class="form-row">
+                     <div class="col-md-6 mb-3">
+                        <input type="text" name="loc" class="form-control" placeholder="Oraș/localitate">
+                     </div>
+                     <div class="col-md-6 mb-3">
+                        <input type="number"  min="0" name="pret" class="form-control" placeholder="Preț maxim">  
+                     </div>
+                  </div>
+                  <button class="btn btn-secondary btn-block mt-4" type="submit">Caută</button>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<br>
+{% include 'partials/_alerts.html' %}
+<!-- Anuturi noi aparute -->
+<section id="listings" class="py-5">
+   <div class="container">
+      <h3 class="text-center mb-3">Nou apărute</h3>
+      <div class="row">
+        <!-- Apartament-->
+         {% if apartaments %}
+         {% for apartament in apartaments %}
+         <div class="col-md-6 col-lg-4 mb-4r">
+            <div class="card listing-preview">
+               <img class="card-img-top" src="{{apartament.fotografie1.url}}" alt="" width="500" height="250">
+               <div class="card-img-overlay">
+                  <h2>
+                     <span class="badge badge-secondary text-white">€ {{apartament.pret | intcomma}}</span>
+                  </h2>
+               </div>
+               <div class="card-body">
+                  <div class="listing-heading text-center">
+                     <h4 class="text-primary">{{apartament.titlu}}</h4>
+                     <p>
+                        <i class="fas fa-map-marker text-secondary"></i> {{apartament.oras_sau_localitate}}, {{apartament.judet}}
+                     </p>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                     <div class="col-7">
+                        <i class="fas fa-th-large"></i> {{apartament.suprafata_utila}} mp utili
+                     </div>
+                     <div class="col-5">
+                        <i class="fas fa-building"></i> Etaj: {% if apartament.etaj == 0 %}
+                        Parter
+                        {% else %}
+                        {{apartament.etaj}}
+                        {% endif %}
+                     </div>
+                  </div>
+                  <div class="row py-3 text-secondary">
+                     <div class="col-7">
+                        <i class="fas fa-box"></i> {{apartament.compartimentare}}
+                     </div>
+                     <div class="col-5">
+                        <i class="fas fa-couch"></i> Camere: {{apartament.numar_camere}}
+                     </div>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                     <div class="col-12">
+                        <i class="fas fa-briefcase"></i> {{apartament.agentie_responsabila}}
+                     </div>
+                  </div>
+                  <div class="row text-secondary pb-2">
+                     <div class="col-10">
+                        <i class="fas fa-clock"></i> {{apartament.data_publicare | timesince}}
+                     </div>
+                  </div>
+                  <hr>
+                  <a href="{% url 'apartament' apartament.id %}" class="btn btn-primary btn-block">Vezi mai mult</a>
+               </div>
+            </div>
+            <pre class="tab"></pre>
+         </div>
+         {% endfor %}
+         {% endif %}
+         <!-- Casa-->
+         {% if houses %}
+         {% for house in houses %}
+         <div class="col-md-6 col-lg-4 mb-4r">
+            <div class="card listing-preview">
+               <img class="card-img-top" src="{{house.fotografie1.url}}" alt="" width="500" height="250">
+               <div class="card-img-overlay">
+                  <h2>
+                     <span class="badge badge-secondary text-white">€ {{house.pret | intcomma}}</span>
+                  </h2>
+               </div>
+               <div class="card-body">
+                  <div class="listing-heading text-center">
+                     <h4 class="text-primary">{{house.titlu}}</h4>
+                     <p>
+                        <i class="fas fa-map-marker text-secondary"></i> {{house.oras_sau_localitate}}, {{house.judet}}
+                     </p>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                     <div class="col-6">
+                        <i class="fas fa-th-large"></i> {{house.suprafata_utila}} mp utili
+                     </div>
+                     <div class="col-6">
+                        <i class="fas fa-seedling"></i> {{house.suprafata_teren}} mp teren
+                     </div>
+                  </div>
+                  <div class="row py-3 text-secondary">
+                     <div class="col-6">
+                        <i class="fas fa-bed"></i> Dormitoare: {{house.numar_dormitoare}}
+                     </div>
+                     <div class="col-6">
+                        <i class="fas fa-home"></i> {{house.regim_inaltime}}
+                     </div>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                     <div class="col-12">
+                        <i class="fas fa-briefcase"></i> {{house.agentie_responsabila}}
+                     </div>
+                  </div>
+                  <div class="row text-secondary pb-2">
+                     <div class="col-10">
+                        <i class="fas fa-clock"></i> {{house.data_publicare | timesince}}
+                     </div>
+                  </div>
+                  <hr>
+                  <a href="{% url 'house' house.id %}" class="btn btn-primary btn-block">Vezi mai mult</a>
+               </div>
+            </div>
+            <pre class="tab"></pre>
+         </div>
+         {% endfor %}
+         {% endif %}
+         <!-- Teren-->
+         {% if lands %}
+         {% for land in lands %}
+         <div class="col-md-6 col-lg-4 mb-4r">
+            <div class="card listing-preview">
+               <img class="card-img-top" src="{{land.fotografie1.url}}" alt="" width="500" height="250">
+               <div class="card-img-overlay">
+                  <h2>
+                     <span class="badge badge-secondary text-white">€ {{land.pret | intcomma}}</span>
+                  </h2>
+               </div>
+               <div class="card-body">
+                  <div class="listing-heading text-center">
+                     <h4 class="text-primary">{{land.titlu}}</h4>
+                     <p>
+                        <i class="fas fa-map-marker text-secondary"></i> {{land.oras_sau_localitate}}, {{land.judet}}
+                     </p>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                     <div class="col-9">
+                        <i class="fas fa-sign"></i> Teren: {{land.tip_teren}}
+                     </div>
+                  </div>
+                  <div class="row py-3 text-secondary">
+                     <div class="col-6">
+                        <i class="fas fa-th-large"></i> {{land.suprafata_teren}} mp
+                     </div>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                     <div class="col-12">
+                        <i class="fas fa-briefcase"></i> {{land.agentie_responsabila}}
+                     </div>
+                  </div>
+                  <div class="row text-secondary pb-2">
+                     <div class="col-10">
+                        <i class="fas fa-clock"></i> {{land.data_publicare | timesince}}
+                     </div>
+                  </div>
+                  <hr>
+                  <a href="{% url 'land' land.id %}" class="btn btn-primary btn-block">Vezi mai mult</a>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+         {% endif %}
+      </div>
+   </div>
+</section>
+
+<!-- Servicii-->
+<section id="services" class="py-5 bg-secondary text-white">
+   <div class="container">
+      <div class="row text-center">
+         <div class="col-md-4">
+            <i class="fas fa-search fa-4x mr-4"></i>
+            <hr>
+            <h3>Ușor de căutat</h3>
+            <p></p>
+         </div>
+         <div class="col-md-4">
+            <i class="fas fa-suitcase fa-4x mr-4"></i>
+            <hr>
+            <h3>Achiziționare & închiriere</h3>
+            <p></p>
+         </div>
+         <div class="col-md-4">
+            <i class="fas fa-home fa-4x mr-4"></i>
+            <hr>
+            <h3>Gestionarea proprietăților</h3>
+            <p></p>
+         </div>
+      </div>
+   </div>
+</section>
+
+{% endblock %}

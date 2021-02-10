@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="register" class="bg-light py-5">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-6 mx-auto">
+            <div class="card">
+               <div class="card-header bg-primary text-white">
+                  <h4>
+                     <i class="far fa-plus-square"></i> Anunț nou - casă
+                  </h4>
+               </div>
+               <div class="card-body">
+                  <!-- Alerts-->
+                  {% include 'partials/_alerts.html' %}
+                  <form enctype="multipart/form-data" method="POST" action="{% url 'add_house' %}">
+                     {% csrf_token %}
+                     <div class="form-group">
+                        <label for="titlu">Titlu*</label>
+                        <input type="text" name="titlu" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="judet">Județ*</label>
+                        <select name="judet" class="form-control" required>
+                           <option value="" selected="true" disabled="disabled">--</option>
+                           {% for key, value in judete %}
+                           <option value="{{key}}"
+                           {% if key == values.judet %}
+                           selected
+                           {% endif %}
+                           >{{value}}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="oras_sau_localitate">Oraș sau localitate*</label>
+                        <input type="text" name="oras_sau_localitate" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="adresa">Adresa*</label>
+                        <input type="text" name="adresa" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="descriere">Descriere*</label>
+                     </div>
+                     <div class="form-group">
+                        <textarea id="descriere" name="descriere" rows="10" cols="65" required></textarea>
+                     </div>
+                     <div class="form-group">
+                        <label for="suprafata_construita">Suprafață construită*</label>
+                        <input type="number" step="0.1" min="0.0" name="suprafata_construita" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="suprafata_utila">Suprafață utilă*</label>
+                        <input type="number" step="0.1" min="0.0" name="suprafata_utila" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="numar_dormitoare">Număr dormitoare*</label>
+                        <input type="number" name="numar_dormitoare" min="0" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="numar_livinguri">Număr livinguri*</label>
+                        <input type="number" name="numar_livinguri" min="0" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="numar_bai">Număr băi*</label>
+                        <input type="number" name="numar_bai" min="0" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="numar_bucatarii">Număr bucătării*</label>
+                        <input type="number" name="numar_bucatarii" min="0" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="numar_balcoane">Număr balcoane*</label>
+                        <input type="number" name="numar_balcoane" min="0" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="numar_terase">Număr terase*</label>
+                        <input type="number" name="numar_terase" min="0" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="numar_garaje">Număr garaje*</label>
+                        <input type="number" name="numar_garaje" min="0" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="suprafata_teren">Suprafață teren*</label>
+                        <input type="number" step="0.1" min="0.0" name="suprafata_teren" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="structura_rezistenta">Structură rezistentă*</label>
+                        <input type="text" name="structura_rezistenta" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="tip_acoperis">Tip acoperiș*</label>
+                        <input type="text" name="tip_acoperis" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="regim_inaltime">Regim înălțime*</label>
+                        <input type="text" name="regim_inaltime" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="an_constructie">An construcție*</label>
+                        <input type="number" name="an_constructie" min="1800" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="utilitati_generale">Utilități generale*</label>
+                     </div>
+                     <div class="form-group">
+                        <textarea id="utilitati_generale" name="utilitati_generale" rows="5" cols="65" required></textarea>
+                     </div>
+                     <div class="form-group">
+                        <label for="finisaje">Finisaje*</label>
+                     </div>
+                     <div class="form-group">
+                        <textarea id="finisaje" name="finisaje" rows="5" cols="65" required></textarea>
+                     </div>
+                     <div class="form-group">
+                        <label for="posibilitate_inchiriere">Posibiliatate închiriere</label>
+                        <select name="posibilitate_inchiriere" class="form-control" required>
+                           <option value="Nu">Nu</option>
+                           <option value="Da">Da</option>
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="pret">Pret*</label>
+                        <input type="number" name="pret" min="0" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="alte_detalii">Alte detalii</label>
+                     </div>
+                     <div class="form-group">
+                        <textarea id="alte_detalii" name="alte_detalii" rows="5" cols="65"></textarea>
+                     </div>
+                     <div class="form-group">
+                        <label for="fotografie1">Fotografie 1*</label>
+                        <input type="file" name="fotografie1" id="fotografie1" accept="image/*" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="fotografie2">Fotografie 2 </label>
+                        <input type="file" name="fotografie2" id="fotografie2" accept="image/*">
+                     </div>
+                     <div class="form-group">
+                        <label for="fotografie3">Fotografie 3 </label>
+                        <input type="file" name="fotografie3" id="fotografie3" accept="image/*">
+                     </div>
+                     <div class="form-group">
+                        <label for="fotografie4">Fotografie 4 </label>
+                        <input type="file" name="fotografie4" id="fotografie4" accept="image/*">
+                     </div>
+                     <div class="form-group">
+                        <label for="fotografie5">Fotografie 5 </label>
+                        <input type="file" name="fotografie5" id="fotografie1=5" accept="image/*">
+                     </div>
+                     <div class="form-group">
+                        <label for="fotografie6">Fotografie 6 </label>
+                        <input type="file" name="fotografie6" id="fotografie6" accept="image/*">
+                     </div>
+                     <div class="form-group">
+                        <label for="agentie">Trimitere cererea către:*</label>
+                        <select name="agentie" class="form-control" required>
+                           <option value="" selected="true" disabled="disabled">--</option>
+                           {% for value in namesRealEstates %}
+                           <option value="{{value}}"
+                              >{{value}}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <!--Submit-->
+                     <input type="submit" value="Trimite" class="btn btn-secondary btn-block">
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+{% endblock %}

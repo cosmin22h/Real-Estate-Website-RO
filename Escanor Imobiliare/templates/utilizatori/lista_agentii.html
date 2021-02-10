@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">Agențiile imobiliare</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'client_account' %}">{{client.tip_client}}: {{client.nume}} {{client.prenume}}</a>
+          </li>
+          <li class="breadcrumb-item active"> Agenții</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">CIF</th>
+                <th scope="col">Agenții imobiliare</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for realEstate in realEstates %}
+                    <tr>
+                        <td>{{realEstate.user.username}}</td>
+                        <td>{{realEstate.nume}}</td>
+                        <td>
+                        <a class="btn btn-primary" href="{% url 'profil_real_estate' realEstate.id %}">Vezi profil</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

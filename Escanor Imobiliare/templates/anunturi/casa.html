@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<!--Expunere casa -->
+<section id="showcase-inner" class="py-5 text-white">
+   <div class="container">
+      <div class="row text-center">
+         <div class="col-md-12">
+            <h1 class="display-4">{{house.titlu}}</h1>
+            <p class="lead">
+               <i class="fas fa-map-marker"></i> {{house.judet}}, {{house.oras_sau_localitate}}, {{house.adresa}}
+            </p>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!--Breadcrumb -->
+<section id="bc" class="mt-3">
+   <div class="container">
+      <nav>
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+               <a href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+               <a href="{% url 'listings' %}">Anunțuri</a>
+            </li>
+            <li class="breadcrumb-item">
+               <a href="{% url 'houses' %}">Case</a>
+            </li>
+            <li class="breadcrumb-item active">{{house.titlu}}</li>
+         </ol>
+      </nav>
+   </div>
+</section>
+
+{% include 'partials/_alerts.html' %}
+<!--Anunt -->
+<section id="listing" class="py-4">
+   <div class="container">
+      <a href="{% url 'houses' %}" class="btn btn-light mb-4">Înapoi la case</a>
+      <div class="row">
+         <div class="col-md-9">
+            <!--Imagine principala -->
+            <img src="{{house.fotografie1.url}}" alt="" class="img-main img-fluid mb-3">
+            <!--Imagini secundare -->
+            <div class="row mb-5 thumbs">
+               {% if house.fotografie2 %}
+               <div class="col-md-2">
+                  <a href="{{house.fotografie2.url}}" data-lightbox="home-images">
+                  <img src="{{house.fotografie2.url}}" alt="" class="img-fluid">
+                  </a>
+               </div>
+               {% endif %}
+               {% if house.fotografie3 %}
+               <div class="col-md-2">
+                  <a href="{{house.fotografie3.url}}" data-lightbox="home-images">
+                  <img src="{{house.fotografie3.url}}" alt="" class="img-fluid">
+                  </a>
+               </div>
+               {% endif %}
+               {% if house.fotografie4 %}
+               <div class="col-md-2">
+                  <a href="{{house.fotografie4.url}}" data-lightbox="home-images">
+                  <img src="{{house.fotografie4.url}}" alt="" class="img-fluid">
+                  </a>
+               </div>
+               {% endif %}
+               {% if house.fotografie5 %}
+               <div class="col-md-2">
+                  <a href="{{house.fotografie5.url}}" data-lightbox="home-images">
+                  <img src="{{house.fotografie5.url}}" alt="" class="img-fluid">
+                  </a>
+               </div>
+               {% endif %}
+               {% if house.fotografie6 %}
+               <div class="col-md-2">
+                  <a href="{{house.fotografie6.url}}" data-lightbox="home-images">
+                  <img src="{{house.fotografie6.url}}" alt="" class="img-fluid">
+                  </a>
+               </div>
+               {% endif %}
+            </div>
+            <!--Descriere -->
+            <h1 style="font-size:20px;color:#10284e;">Descriere</h1>
+            <div class="row mb-5">
+               <div class="col-md-12">
+                  {{house.descriere | linebreaks}}
+               </div>
+            </div>
+            <!--Specificatii-->
+            <h2 style="font-size:20px;color:#10284e;">Specificații</h2>
+            <div class="row mb-6 fields">
+               <div class="col-md-6">
+                  <ul class="list-group list-group-flush">
+                     <li class="list-group-item text-secondary">
+                        <i class="far fa-square"></i> Suprafață construită: 
+                        <span class="float-right">{{house.suprafata_construita}} mp</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-th-large"></i> Suprafață utilă: 
+                        <span class="float-right">{{house.suprafata_utila}} mp</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-bed"></i> Nr. dormitoare:
+                        <span class="float-right">{{house.numar_dormitoare}}</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-fire"></i> Nr. livinguri:
+                        <span class="float-right">{{house.numar_livinguri}}</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-bath"></i> Nr. băi:
+                        <span class="float-right">{{house.numar_bai}}</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-utensils"></i> Nr. bucătării:
+                        <span class="float-right">{{house.numar_bucatarii}}</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-cloud"></i> Nr. balcoane:
+                        <span class="float-right">{{house.numar_balcoane}}</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-coffee"></i> Nr. terase:
+                        <span class="float-right">{{house.numar_terase}}</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-warehouse"></i> Nr. garaje:
+                        <span class="float-right">{{house.numar_garaje}}</span>
+                     </li>
+                  </ul>
+               </div>
+               <div class="col-md-6">
+                  <ul class="list-group list-group-flush">
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-road"></i> Front stradal:
+                        <span class="float-right">{{house.front_stradal}} mp
+                        </span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-seedling"></i> Suprafață teren:
+                        <span class="float-right">{{house.suprafata_teren}} mp 
+                        </span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-gavel"></i> Structură rezistentă:
+                        <span class="float-right">{{house.structura_rezistenta}}</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-caret-up"></i> Tip acoperiș:
+                        <span class="float-right">{{house.tip_acoperis}}</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-home"></i> Regim de înălțime:
+                        <span class="float-right">{{house.regim_inaltime}}</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-calendar-check"></i> An construcție:
+                        <span class="float-right">{{house.an_constructie}}</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-handshake"></i> Posibiliatate închiriere:
+                        <span class="float-right">
+                        {% if house.posibilitate_inchiriere %}
+                        Da
+                        {% else %}
+                        Nu
+                        {% endif %}
+                        </span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="fas fa-money-bill"></i> Preț:
+                        <span class="float-right">{{house.pret | intcomma}} €</span>
+                     </li>
+                     <li class="list-group-item text-secondary">
+                        <i class="far fa-calendar-plus"></i> Data publicării:
+                        <span class="float-right">{{house.data_publicare}}</span>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <pre class="tab"></pre>
+            <pre class="tab"></pre>
+            <!--Utilitati generale -->
+            <h3 style="font-size:20px;color:#10284e;">Utilități generale</h3>
+            <div class="row mb-5">
+               <div class="col-md-12">
+                  {{house.utilitati_generale | linebreaks}}
+               </div>
+            </div>
+            <!--Finisaje -->
+            <h4 style="font-size:20px;color:#10284e;">Finisaje</h4>
+            <div class="row mb-5">
+               <div class="col-md-12">
+                  {{house.finisaje | linebreaks}}
+               </div>
+            </div>
+            <!--Alte delatii -->
+            {% if house.alte_detalii != None and house.alte_detalii != '' %}
+            <h5 style="font-size:20px;color:#10284e;">Alte detalii</h5>
+            <div class="row mb-5">
+               <div class="col-md-12">
+                  {{house.alte_detalii | linebreaks}}
+               </div>
+            </div>
+            {% endif %}
+            <!--Locatie -->
+            <h4 style="font-size:20px;">Adresă: 
+               <a href="https://maps.google.com/?q={{house.adresa}}, {{house.oras_sau_localitate}}" class="text-secondary">{{house.adresa}}, {{house.oras_sau_localitate}}</a>
+            </h4>
+            <div class="row mb-5">
+               {% for district in districts %}
+               {% if house.judet == district.judet %}
+               <iframe src="{{district.harta}}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+               {% endif %}
+               {% endfor %}
+            </div>
+         </div>
+         <!--Agentie -->
+         <div class="col-md-3">
+            <div class="card mb-3">
+               <img class="card-img-top" src="{{house.agentie_responsabila.logo.url}}" alt="">
+               <div class="card-body">
+                  <h6 class="card-title">Agenție responsabilă</h6>
+                  <a href="{% url 'profil_real_estate' house.agentie_responsabila.id %}" class="text-primary" style="font-weight: bold;">{{house.agentie_responsabila}}</a>
+               </div>
+            </div>
+            {% if user.is_authenticated %}
+            {% if request.user.client.tip_client == "Client" %}
+            <form method="POST" action="{% url 'house' house.id %}">
+               {% csrf_token %}
+               <input type="submit" value="Adaugă la favorite" class="btn btn-secondary btn-block btn-lg"> 
+            </form>
+            <br>
+            <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Contactează-ne</button>
+            {% endif %}
+            {% else %}
+            <a class="btn btn-block btn-primary" href="{% url 'login' %}" role="button">Contactează-ne</a>
+            {% endif %}
+         </div>
+      </div>
+   </div>
+</section>
+
+<!--Contactare -->
+<div class="modal fade" id="inquiryModal" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="inquiryModalLabel">Contactează-ne</h5>
+            <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form action="{% url 'contact' %}" method="POST">
+               {% csrf_token %}
+               <input type="hidden" name="tip_anunt" value="Casa">
+               <input type="hidden" name="id_anunt" value="{{house.id}}">
+               <div class="form-group">
+                  <label for="titlu_anunt" class="col-form-label">Titul:</label>
+                  <input type="text" name="titlu_anunt" class="form-control" value="{{house.titlu}}" readonly>
+               </div>
+               <input type="hidden" name="id_agentie" value="{{house.agentie_responsabila.id}}">
+               <input type="hidden" name="id_proprietar" value="{{house.proprietar.username}}">
+               <input type="hidden" name="id_client" value="{{client.id}}">
+               <div class="form-group">
+                  <label for="nume" class="col-form-label">Nume:</label>
+                  <input type="text" name="nume" class="form-control" value="{{client.nume}}" required>
+               </div>
+               <div class="form-group">
+                  <label for="prenume" class="col-form-label">Prenume:</label>
+                  <input type="text" name="prenume" class="form-control" value="{{client.prenume}}" required>
+               </div>
+               <div class="form-group">
+                  <label for="email" class="col-form-label">Email:</label>
+                  <input type="email" name="email" class="form-control" value="{{client.email}}" required>
+               </div>
+               <div class="form-group">
+                  <label for="telefon" class="col-form-label">Telefon:</label>
+                  <input type="text" name="telefon" class="form-control" value="{{client.telefon}}" required>
+               </div>
+               <div class="form-group">
+                  <label for="mesaj" class="col-form-label">Mesaj:</label>
+                  <textarea name="mesaj" class="form-control"></textarea>
+               </div>
+               <hr>
+               <!--Submit  contact-->
+               <input type="submit" value="Trimite" class="btn btn-block btn-secondary">
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

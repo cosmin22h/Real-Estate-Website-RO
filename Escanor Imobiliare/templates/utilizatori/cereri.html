@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{realEstate.nume}}</h1>
+          <p class="lead">Agenție imobiliară</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'real_estate_account' %}">
+              Agenție imobiliară: {{realEstate.nume}} </a>
+          </li>
+          <li class="breadcrumb-item active">Cereri</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+  {% include 'partials/_alerts.html' %}
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table" >
+            <thead>
+              <tr>
+                <th scope="col">Tip</th>
+                <th scope="col">ID</th>
+                <th scope="col">Titlu</th>
+                <th scope="col">Proprietar</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for apartament in apartaments %}
+                    <tr>
+                        <td>{{apartament.tip}}</td>
+                        <td>{{apartament.id}}</td>
+                        <td><a href="{% url 'apartament' apartament.id %}"> {{apartament.titlu}} </a></td>
+                        <td><a href="{% url 'owner_contacts' apartament.proprietar.username %}"> {{apartament.proprietar.username}}</a></td>
+                        <td>
+                          <a class="btn btn-secondary" href="{% url 'posts_apartament' apartament.id %}">Postează</a>
+                        </td>
+                        <td>
+                          <a class="btn btn-danger" href="{% url 'delete_apartament' apartament.id %}">Șterge</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for house in houses %}
+                <tr>
+                    <td>Casă</td>
+                    <td>{{house.id}}</td>
+                    <td><a href="{% url 'house' house.id %}"> {{house.titlu}} </a></td>
+                    <td><a href="{% url 'owner_contacts' house.proprietar.username %}"> {{house.proprietar.username}}</a></td>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'posts_house' house.id %}">Postează</a>
+                    </td>
+                    <td>
+                      <a class="btn btn-danger" href="{% url 'delete_house' house.id %}">Șterge</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% for land in lands %}
+            <tr>
+                <td>Teren {{land.tip}}</td>
+                <td>{{land.id}}</td>
+                <td><a href="{% url 'land' land.id %}"> {{land.titlu}} </a></td>
+                <td><a href="{% url 'owner_contacts' land.proprietar.username %}"> {{land.proprietar.username}}</a></td>
+                <td>
+                    <button class="btn btn-secondary" onclick="myFunction_post_land({{land.id}})">Postează</button>
+                      <script>
+                        function myFunction_post_land(id) {
+                          if(confirm("Ești sigur că dorești să postezi acest anunț?")) {
+                            var getUrl = window.location + "/posteaza_teren/" + id; 
+                            window.location.href = getUrl;
+                          }
+                        }
+                      </script>
+                  </td>
+                  <td>
+                    <button class="btn btn-danger" onclick="myFunction_delete_land({{land.id}})">Șterge</button>
+                      <script>
+                        function myFunction_delete_land(id) {
+                          if(confirm("Ești sigur că dorești să ștergi acest anunț?")) {
+                            var getUrl = window.origin + '/cont/anunturile_mele/stergere_teren/' + id;
+                            window.location.href = getUrl;
+                          }
+                         
+                        }
+                      </script>
+                  </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br><br>
+{% endblock %}

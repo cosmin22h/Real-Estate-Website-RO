@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Expunere agentie --> 
+<section id="showcase-inner" class="py-5 text-white">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <h1 class="display-4">{{realEstate.nume}}</h1>
+            <p class="lead">
+               <a href="https://maps.google.com/?q={{realEstate.adresa_sediu}}" class="lead" style="color:white"><i class="fas fa-map-marker"></i> {{realEstate.adresa_sediu}}</a>
+               
+            </p>
+            <p class="lead">
+               <i class="fas fa-calendar-check"></i> An înființare: {{realEstate.an_infiintare}}
+            </p>
+            {% if realEstate.website != None %}
+            <a href="https:{{realEstate.website}}/" class="lead" style="color:white">
+            <i class="fas fa-globe"></i> {{realEstate.website}}
+            </a>
+            <pre class="tab"></pre>
+            {%endif%}
+            <p class="lead">
+               <i class="fas fa-phone"></i> {{realEstate.telefon1}}
+            </p>
+            {% if realEstate.telefon2 != None %}
+            <p class="lead">
+               <i class="fas fa-phone"></i> {{realEstate.telefon2}}
+            </p>
+            {% endif %}
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+   <div class="container">
+      <nav>
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+               <a href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+               Agenții
+            </li>
+            <li class="breadcrumb-item active">Agenție: {{realEstate.nume}}</li>
+         </ol>
+      </nav>
+   </div>
+</section>
+
+<!-- Logo si descriere agenite -->
+<section id="realor" class="py-3">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-3">
+            <div class="card mb-3">
+               <img class="card-img-top" src="{{realEstate.logo.url}}" alt="">
+            </div>
+         </div>
+         <div class="card mb-3">
+            <div class="card-body">
+               <h6 class="card-title">Despre {{realEstate.nume}}</h6>
+               {{realEstate.descriere | linebreaks}}
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<br><br>
+{% endblock %} 

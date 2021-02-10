@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Expunere-->
+<section id="showcase-inner" class="py-5 text-white">
+   <div class="container">
+      <div class="row text-center">
+         <div class="col-md-12">
+            <h1 class="display-4">Despre Escanor Imobiliare</h1>
+            <p class="lead">Special creat pentru tine</p>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+   <div class="container">
+      <nav aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+               <a href="{% url 'index' %}">
+               <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item active"> Despre noi</li>
+         </ol>
+      </nav>
+   </div>
+</section>
+
+<!-- Despre noi-->
+<section id="about" class="py-4">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-8">
+            <h2>Escanor Imobiliare</h2>
+            <p class="lead"></p>
+            <img src="{% static 'img/key.jpg' %}" alt="">
+            
+         </div>
+         <div class="col-md-15">
+         <p class="mt-4">
+            Escanor Imobiliare se dedică întregii piețe de imobiliare din România.
+         </p>
+         <p class="mt-4">
+            Platformă noastră oferă acces rapid și ușor tuturor persoanelor ce dores să achiziționeze 
+            o proprietate sau să ofere o proprietate. <br>
+            Pentru clienții noștrii care doresc un nou răsărit oferim posibiliatea găsirii acestuia în apartamentele din
+            marile și micile orașe din România sau în casle din suburbiile acestora sau din comunitățiile rurale ale
+            țării noastre. Oferta noastră se extinde și la terenuri de construcție sau agricole.<br>
+            Pentru proprietari, platforma noastră pune la dispoziția acestora cele mai renumite agenții imobiliare
+            din România pentru o comunicare cât mai ușoară și rapidă cu clienții și un mod eficient de gestionare 
+            a proprietăților și contactelor. 
+         </p>
+         <p class="mt-4" style="color:red">
+            Escanor Imobiliare NU vinde și NU închirează proprietăți!
+         </p>
+         <div class="col-md-15">
+            <p class="mt-4">
+               Ai o întrebare? <a href="{% url 'contact_escanor' %}">Contactează-ne</a>
+            </p>
+         </div>
+      </div>
+      </div>
+   </div>
+   </div>
+</section>
+
+<!-- Vezi anunturi -->
+<section id="work" class="bg-dark text-white text-center">
+   <h2 class="display-4">Ce mai aștepți? Înregistrează-te acuma!</h2>
+   <br>
+   <a href="{% url 'register' %}" class="btn btn-secondary text-white btn-block">Crează cont</a>
+</section>
+
+{% endblock %}

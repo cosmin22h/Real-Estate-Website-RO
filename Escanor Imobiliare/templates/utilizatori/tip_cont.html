@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Expunere-->
+<section id="showcase-inner" class="py-5 text-white">
+   <div class="container">
+      <div class="row text-center">
+         <div class="col-md-12">
+            <h1 class="display-4">Bun venit pe Escanor Imobiliare!</h1>
+            <p class="lead"></p>
+         </div>
+      </div>
+   </div>
+</section>
+
+<style>
+   .column {
+      margin-left: 200px;
+      width: 30.0%;
+      padding: 0px;
+    }
+    
+    /* Clearfix (clear floats) */
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+   </style>
+  
+   <pre></pre>
+   <div class="row">
+      <div class="column">
+          <a href="{% url 'register_client' %}" type="button" class="btn btn-primary btn-lg btn-block">Sunt o persoană fizică</a>
+        <img src="../../static/img/cont_client.png" style="width:100%">
+        
+      </div>
+      <div class="column">
+         <a href="{% url 'register_real_estate' %}" type="button" class="btn btn-secondary btn-lg btn-block">Reprezint o agenție imobiliară  </a>
+
+        <img src="../../static/img/cont_agentie.png" style="width:100%">
+      </div>
+    </div>
+
+
+
+{% endblock %}

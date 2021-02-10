@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{client.nume}} {{client.prenume}}</h1>
+          <p class="lead">Client</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'client_account' %}">
+                Client: {{client.nume}} {{client.prenume}}</a>
+          </li>
+          <li class="breadcrumb-item active"> Anunțuri favorite</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+  {% include 'partials/_alerts.html' %}
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Anunțuri favorite</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Tip</th>
+                <th scope="col">ID</th>
+                <th scope="col">Titlu proprietate</th>
+                <th scope="col">Agenție responsabilă</th>
+                <th scope="col"></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for apartament in apartamente_favorite %}
+              <tr>
+                  <td>{{apartament.tip}}</td>
+                  <td>{{apartament.id}}</td>
+                  <td><a href="{% url 'apartament' apartament.id%}"> {{apartament.titlu}} </a></td>
+                  <td><a href="{% url 'profil_real_estate' apartament.agentie_responsabila.id%}"> {{apartament.agentie_responsabila}} </a></td>
+                  <td><a class="btn btn-danger" href="{% url 'delete_favorites_apartament' apartament.id %}">Șterge anunț din listă</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+                {% for house in case_favorite %}
+                <tr>
+                    <td>Casă</td>
+                    <td>{{house.id}}</td>
+                    <td><a href="{% url 'house' house.id%}"> {{house.titlu}} </a></td>
+                    <td><a href="{% url 'profil_real_estate' house.agentie_responsabila.id%}"> {{house.agentie_responsabila}} </a></td>
+                    <td><a class="btn btn-danger" href="{% url 'delete_favorites_house' house.id %}">Șterge anunț din listă</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tbody>
+                {% for land in terenuri_favorite %}
+                <tr>
+                    <td>{{land.tip_teren}}</td>
+                    <td>{{land.id}}</td>
+                    <td><a href="{% url 'land' land.id%}"> {{land.titlu}} </a></td>
+                    <td><a href="{% url 'profil_real_estate' land.agentie_responsabila.id%}"> {{land.agentie_responsabila}} </a></td>
+                    <td><a class="btn btn-danger" href="{% url 'delete_favorites_land' land.id %}">Șterge anunț din listă</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

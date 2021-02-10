@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+
+<!-- Expunere mesaj-->
+<section id="showcase-inner" class="py-5 text-white">
+   <div class="container">
+      <div class="row text-center">
+         <div class="col-md-12">
+            <h1 class="display-4">Ce mai aștepți?</h1>
+            <p class="lead">Caută proprieatatea care ți se potrivește cel mai bine. Sigur este aici!</p>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+   <div class="container">
+      <nav aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+               <a href="{% url 'index' %}">
+               <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item">
+               <a href="{% url 'listings' %}"> Anunțuri</a>
+            </li>
+            <li class="breadcrumb-item active"> Apartamente</li>
+         </ol>
+      </nav>
+   </div>
+</section>
+
+<!-- Anunturi apartamente -->
+<section id="listings" class="py-4">
+   <div class="container">
+      <div class="row">
+         {% if apartaments %}
+         {% for apartament in apartaments %}
+         <div class="col-md-6 col-lg-4 mb-4r">
+            <div class="card listing-preview">
+               <img class="card-img-top" src="{{apartament.fotografie1.url}}" alt="" width="500" height="250">
+               <div class="card-img-overlay">
+                  <h2>
+                     <span class="badge badge-secondary text-white">€ {{apartament.pret | intcomma}}</span>
+                  </h2>
+               </div>
+               <div class="card-body">
+                  <div class="listing-heading text-center">
+                     <h4 class="text-primary">{{apartament.titlu}}</h4>
+                     <p>
+                        <i class="fas fa-map-marker text-secondary"></i> {{apartament.oras_sau_localitate}}, {{apartament.judet}}
+                     </p>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                     <div class="col-7">
+                        <i class="fas fa-th-large"></i> {{apartament.suprafata_utila}} mp utili
+                     </div>
+                     <div class="col-5">
+                        <i class="fas fa-building"></i> Etaj: {% if apartament.etaj == 0 %}
+                        Parter
+                        {% else %}
+                        {{apartament.etaj}}
+                        {% endif %}
+                     </div>
+                  </div>
+                  <div class="row py-3 text-secondary">
+                     <div class="col-7">
+                        <i class="fas fa-box"></i> {{apartament.compartimentare}}
+                     </div>
+                     <div class="col-5">
+                        <i class="fas fa-couch"></i> Camere: {{apartament.numar_camere}}
+                     </div>
+                  </div>
+                  <hr> 
+                  <div class="row py-2 text-secondary">
+                     <div class="col-12">
+                        <i class="fas fa-briefcase"></i> {{apartament.agentie_responsabila}}
+                     </div>
+                  </div> 
+                  <div class="row text-secondary pb-2">
+                     <div class="col-10">
+                        <i class="fas fa-clock"></i> {{apartament.data_publicare | timesince}}
+                     </div>
+                  </div>
+                  <hr>
+                  <a href="{% url 'apartament' apartament.id %}" class="btn btn-primary btn-block">Vezi mai mult</a>
+               </div>
+            </div>
+            <pre class="tab"></pre>
+         </div>
+         {% endfor %}
+         {% endif %}
+      </div>
+      <pre class="tab"></pre>
+
+      <!-- Paginare -->
+      <div class="row">
+         <div class="col-md-12">
+            {% if apartaments.has_other_pages %}
+            <ul class="pagination">
+              <!-- Prev-->
+               {% if apartaments.has_previous %}
+               <li class="page-item">
+                  <a href="?page={{apartaments.previous_page_number}}" class="page-link">&laquo;</a>
+               </li>
+               {% else %}
+               <li class="page-item disabled">
+                  <a class="page-link">&laquo;</a>
+               </li>
+               {% endif %}
+               <!-- Gasire pagina-->
+               {% for i in apartaments.paginator.page_range %}
+               {% if apartaments.number == i %}
+               <li class="page-item active">
+                  <a class="page-link">{{i}}</a>
+               </li>
+               {% else %}
+               <li class="page-item">
+                  <a href="?page={{i}}" class="page-link">{{i}}</a>
+               </li>
+               {% endif %}
+               {% endfor %}
+               <!-- Next-->
+               {% if apartaments.has_next %}
+               <li class="page-item">
+                  <a href="?page={{apartaments.next_page_number}}" class="page-link">&raquo;</a>
+               </li>
+               {% else %}
+               <li class="page-item disabled">
+                  <a class="page-link">&raquo;</a>
+               </li>
+               {% endif %}
+               {% endif %}
+            </ul>
+         </div>
+      </div>
+   </div>
+</section>
+<br><br>
+{% endblock%}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{realEstate.nume}}</h1>
+          <p class="lead">Agenție imobiliară</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'real_estate_account' %}">
+              Agenție imobiliară: {{realEstate.nume}} </a>
+          </li>
+          <li class="breadcrumb-item active">Raport: {{raport.luna_raport}}/{{raport.an_raport}}</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+  {% include 'partials/_alerts.html' %}
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+         <h2>Raport: {{raport.luna_raport}}/{{raport.an_raport}}</h2>
+          <form>
+            {% csrf_token %}
+            <div class="form-group">
+               <label for="apartamente" class="col-form-label">Numărul de contacte pentru anunțurile de tip - apartament/garsoniră</label>
+               <input type="text" name="apartamente" class="form-control" value="{{raport.contacte_apartamente}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="case" class="col-form-label">Numărul de contacte pentru anunțurile de tip - casă</label>
+                <input type="text" name="case" class="form-control" value="{{raport.contacte_case}}" readonly>
+             </div>
+            <div class="form-group">
+               <label for="terenuri" class="col-form-label">Numărul de contacte pentru anunțurile de tip - teren de construncții/agricol:</label>
+               <input type="text" name="terenuri" class="form-control" value="{{raport.contacte_terenuri}}" readonly>
+            </div>
+         </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br><br>
+{% endblock %}

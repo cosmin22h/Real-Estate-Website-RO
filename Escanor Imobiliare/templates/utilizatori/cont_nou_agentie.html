@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section id="register" class="bg-light py-5">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-6 mx-auto">
+            <div class="card">
+               <div class="card-header bg-primary text-white">
+                  <h4>
+                     <i class="fas fa-user-plus"></i> Cont nou - Agenție imobiliară
+                  </h4>
+               </div>
+               <div class="card-body">
+                  <!-- Alerts-->
+                  {% include 'partials/_alerts.html' %}
+                  <form enctype="multipart/form-data" method="POST" action="{% url 'register_real_estate' %}">
+                     {% csrf_token %}
+                     <div class="form-group">
+                        <label for="username">CIF</label>
+                        <input type="text" name="username" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="nume">Nume</label>
+                        <input type="text" name="nume" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="imagine_logo">Logo</label>
+                        <input type="file" name="imagine_logo" id="imagine_logo" accept="image/*">
+                     </div>
+                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="telefon">Telefon</label>
+                        <input type="text" name="telefon" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="adresa_sediu">Adresă sediu</label>
+                        <input type="text" name="adresa_sediu" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="an_infiintare">An infiintare</label>
+                        <input type="number" name="an_infiintare" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="password2">Parolă</label>
+                        <input type="password" name="password" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="password">Confirmare parolă</label>
+                        <input type="password" name="password2" class="form-control" required>
+                     </div>
+                     <input type="submit" value="Confirmare cont" class="btn btn-secondary btn-block">
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+{% endblock %}

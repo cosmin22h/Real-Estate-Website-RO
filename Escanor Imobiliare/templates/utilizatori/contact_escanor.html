@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section id="register" class="bg-light py-5">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-6 mx-auto">
+            <div class="card">
+               <div class="card-header bg-primary text-white">
+                  <h4>
+                    <i class="fas fa-file-contract"></i> Contactează-ne
+                  </h4>
+               </div>
+               <div class="card-body">
+                  <!-- Alerts-->
+                  {% include 'partials/_alerts.html' %}
+                  <form method="POST" action="{% url 'contact_escanor' %}">
+                     {% csrf_token %}
+                     <div class="form-group">
+                        <label for="nume">Nume</label>
+                        <input type="text" name="nume" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="prenume">Prenume</label>
+                        <input type="text" name="prenume" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="telefon">Telefon</label>
+                        <input type="text" name="telefon" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="subiect">Subiect</label>
+                        <input type="text" name="subiect" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="mesaj">Mesaj</label>
+                     </div>
+                     <div class="form-group">
+                        <textarea id="mesaj" name="mesaj" rows="10" cols="65"></textarea>
+                     </div>
+                     <input type="submit" value="Trimite" class="btn btn-secondary btn-block">
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+{% endblock %}
