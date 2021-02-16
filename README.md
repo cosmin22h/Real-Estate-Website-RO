@@ -5,13 +5,24 @@ Types of announces: apartament, house and land. <br>
 Users: admin, customer, owner, real estate agency and website guest. <br>
 Admin: 
   - database management (accounts and announces management);
-  - sending a monthly report to the real estate agencies which containts the number of contacts for each announces type. <br>
-
-Customer: <br>
+  - send a monthly report to the real estate agencies which containts the number of contacts for each announces type. 
+  - account editing;
+  - password changing. 
+Customer:
   - announces viewing;
-  - access and modify a list of favorites;
+  - add an announce to the list of favorites;
+  - access and modify the list of favorites;
   - contact the owner;
   - account editing;
   - password changing. 
+
+Owner:
+  - announces viewing;
+  - add a request to post a new announce;
+  - see messages from potential buyers;
+  - see the real estate agencies which are registered;
+  - account editing;
+  - password changing. 
+  
 
 Project Resources (Bootstrap): https://drive.google.com/drive/folders/1Cf8zm6jNiqCbKXRv8tI2w8KEORIT6SB3
