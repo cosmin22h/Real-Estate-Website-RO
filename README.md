@@ -6,8 +6,7 @@ Users: admin, customer, owner, real estate agency and website guest. <br>
 Admin: 
   - website viewing;
   - database management (accounts and announces management);
-  - send a monthly report to the real estate agencies which containts the number of contacts for each announces type;
-  - password changing. 
+  - send a monthly report to the real estate agencies which containts the number of contacts for each announces type.
  
 Customer:
   - announces viewing;
@@ -15,16 +14,14 @@ Customer:
   - access and modify the list of favorites;
   - contact the owner;
   - contacts viewing;
-  - account editing;
-  - password changing. 
+  - account editing. 
 
 Owner:
   - announces viewing;
   - add a request to post a new announce;
   - see the messages from potential buyers with additional details (the date and the time of a visit);
   - see the real estate agencies which are registered;
-  - account editing;
-  - password changing. 
+  - account editing.
   
 Real estate agency:
   - see the requests from the owners;
@@ -33,8 +30,7 @@ Real estate agency:
   - send the messages from potential buyers with additional details to owners;
   - see the profil;
   - see the monthly report;
-  - account editing;
-  - password changing. 
+  - account editing.
  
 Guest:
   - announces viewing;
