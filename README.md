@@ -60,4 +60,6 @@ Create a new account - customer/owner:
   - password (parola, confirmare parola) - can’t be too similar to your other personal information, must contain at least 8 characters, can’t be a commonly used password, can’t be entirely numeric;
   - after the account is created the agency must wait until the admin approves the account, after that the agency can login with the ID and the password.
  
+All types of announces have an owner, a responsible agency that handles the announce, a title, an address, a description, a price and their specific fields (see the database diagram). <br>
+
 Project Resources (Bootstrap): https://drive.google.com/drive/folders/1Cf8zm6jNiqCbKXRv8tI2w8KEORIT6SB3
