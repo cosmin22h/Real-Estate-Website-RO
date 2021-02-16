@@ -3,7 +3,7 @@ Disclaimer: this is a real estate website dedicated to the Romanian real estate 
 Backend technologies: Django, Python, PostgreSQL. <br>
 Frontend technologies: Bootstrap, HTML, CSS. <br>
 Objective: providing the service of real estate exposures and the service of communication between potential buyers and owners. <br>
-Types of announces: apartament, house and land. <br>
+Types of announces: apartament, house and land - all of these have an owner, a responsible agency that handles the announce, a title, an address, a description, a price and their specific fields (see the database diagram). <br>
 Users: admin, customer, owner, real estate agency and website guest. <br>
 Admin: 
   - website viewing;
@@ -60,6 +60,6 @@ Create a new account - customer/owner:
   - password (parola, confirmare parola) - can’t be too similar to your other personal information, must contain at least 8 characters, can’t be a commonly used password, can’t be entirely numeric;
   - after the account is created the agency must wait until the admin approves the account, after that the agency can login with the ID and the password.
  
-All types of announces have an owner, a responsible agency that handles the announce, a title, an address, a description, a price and their specific fields (see the database diagram). <br>
+The monthly report for the real estate agencies: when a customer wants to contact an owner the current year and month are checked; if the current monthly report doesn't exists in the database, it will be created automatically and updated and will be stored in the database, otherwise the current monthly report will only be updated; the admin decides when the report will be visible for the agencies. <br>
 
 Project Resources (Bootstrap): https://drive.google.com/drive/folders/1Cf8zm6jNiqCbKXRv8tI2w8KEORIT6SB3
