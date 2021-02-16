@@ -8,7 +8,7 @@ Users: admin, customer, owner, real estate agency and website guest. <br>
 Admin: 
   - website viewing;
   - database management (accounts and announces management);
-  - send a monthly report to the real estate agencies which containts the number of contacts for each announces type.
+  - send a monthly report to the real estate agencies which containts the number of contacts for each announces type in the previous month.
  
 Customer:
   - announces viewing;
