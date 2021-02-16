@@ -38,4 +38,26 @@ Guest:
   - announces viewing;
   - create a new account.
 
+Create a new account - customer/owner:
+  - customer type selection: customer/owner;
+  - username - unique, without special characters, can’t be entirely numeric;
+  - last name (nume);
+  - first name (prenume);
+  - phone number (telefon);
+  - email - unique;
+  - date of birth (data nasterii) - minimum age: 18;
+  - password (parola, confirmare parola) - can’t be too similar to your other personal information, must contain at least 8 characters, can’t be a commonly used password, can’t be entirely numeric;
+  - after the account is created the customer/owner can login with the username and the password.
+  
+ Create a new account - real estate agency: 
+  - ID (CIF) - unique, must be entirely numeric;
+  - name (nume);
+  - logo - image file;
+  - email - unique;
+  - phone number (telefon);
+  - address (adresă sediu);
+  - establishment year (an infiintare);
+  - password (parola, confirmare parola) - can’t be too similar to your other personal information, must contain at least 8 characters, can’t be a commonly used password, can’t be entirely numeric;
+  - after the account is created the agency must wait until the admin approves the account, after that the agency can login with the ID and the password.
+ 
 Project Resources (Bootstrap): https://drive.google.com/drive/folders/1Cf8zm6jNiqCbKXRv8tI2w8KEORIT6SB3
