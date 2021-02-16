@@ -62,4 +62,9 @@ Create a new account - customer/owner:
  
 The monthly report for the real estate agencies: when a customer wants to contact an owner the current year and month are checked; if the current monthly report doesn't exists in the database, it will be created automatically and updated and will be stored in the database, otherwise the current monthly report will only be updated; the admin decides when the report will be visible for the agencies. <br>
 
+The users can receive email notifications:
+  - admin: question from a user, reporting a problem;
+  - owner: announce posted/rejected, new message from the agency;
+  - real estate agency: new request, new message from a customer. 
+
 Project Resources (Bootstrap): https://drive.google.com/drive/folders/1Cf8zm6jNiqCbKXRv8tI2w8KEORIT6SB3
