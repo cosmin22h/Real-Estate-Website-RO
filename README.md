@@ -67,4 +67,5 @@ The users can receive email notifications:
   - owner: announce posted/rejected, new message from the agency;
   - real estate agency: new request, new message from a customer. 
 
-Project Resources (Bootstrap): https://drive.google.com/drive/folders/1Cf8zm6jNiqCbKXRv8tI2w8KEORIT6SB3
+Project's resources (Bootstrap): https://drive.google.com/drive/folders/1Cf8zm6jNiqCbKXRv8tI2w8KEORIT6SB3 <br>
+Project's videos references: https://www.youtube.com/watch?v=aB8GXav3dHg&list=PL7Y5Yox90r8PC5Z6PG8ixIf6xg6zOcDMx
