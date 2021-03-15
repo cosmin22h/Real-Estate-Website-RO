@@ -1,7 +1,7 @@
 # Real-Estate-Website-RO
 Disclaimer: this is a real estate website dedicated to the Romanian real estate market. <br>
 Backend technologies: Django, Python, PostgreSQL. <br>
-Frontend technologies: HTML, CSS(Bootstrap). <br>
+Frontend technologies: HTML, CSS (Bootstrap). <br>
 Objective: providing the service of real estate exposures and the service of communication between potential buyers and owners. <br>
 Types of announces: apartament, house and land - all of these have an owner, a responsible agency that handles the announce, a title, an address, a description, a price and their specific fields (see the database diagram). <br>
 Users: admin, customer, owner, real estate agency and website guest. <br>
