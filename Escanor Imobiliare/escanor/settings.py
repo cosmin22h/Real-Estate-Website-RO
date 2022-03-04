@@ -112,6 +112,6 @@ MESSAGE_TAGS = {
 #setari pentru email
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'escanor.imobiliare@gmail.com'
-EMAIL_HOST_PASSWORD = 'escanor22'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
